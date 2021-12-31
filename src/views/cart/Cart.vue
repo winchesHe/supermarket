@@ -1,11 +1,13 @@
 <template>
-  
+  <h1>购物车</h1>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  
+  name:"Cart"
 }
 </script>
+
+<style>
+
 </style>
