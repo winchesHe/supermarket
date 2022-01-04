@@ -1,54 +1,54 @@
 <template>
-  <div class="goods" @click="showDeatil">
-    <img v-lazy="showImg" alt="">
+  <div class="goods" @click="goToDetail">
+    <img v-lazy="getImg" :key="getImg" alt="">
     <div class="goods-info">
-      <p>{{item.title}}</p>
-      <span class="price">{{item.price}}</span>
-      <span class="collect">{{item.cfav}}</span>
+      <p>{{goods.title}}</p>
+      <span class="price">¥{{goods.price}}</span>
+      <span class="collect">{{goods.cfav}}</span>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-  name:"GoodListItem",
-  props:{
-    item:{
-      type:Object,
-      default(){
-        return {}
+	export default {
+		name: "GoodsListItem",
+    props: {
+		  goods: {
+		    type: Object,
+        default: {}
+      }
+    },
+    mounted: function () {
+      // console.log(this.goods);
+    },
+    methods: {
+      goToDetail: function () {
+        // 1.获取iid
+        let iid = this.goods.iid;
+
+        // 2.跳转到详情页面
+        this.$router.push({path: '/detail', query: {iid}})
+      }
+    },
+    computed: {
+      getImg() {
+        return this.goods.img || this.goods.image || this.goods.show.img
       }
     }
-  },
-  methods: {
-    showDeatil(){
-      // console.log("ss");
-      this.$router.push('/detail'+ this.item.iid )
-    }
-  },
-  computed:{
-    showImg(){
-      return this.item.image || this.item.show.img
-    }
-  }
-}
+	}
 </script>
 
-<style>
-.goods {
+<style scoped>
+  .goods {
     padding-bottom: 40px;
     position: relative;
-    width:48%;
-    /* 这是防止主页背景透明 */
-    background-color: #fff;
   }
   .goods img {
     width: 100%;
-    border-radius: 5%;
   }
 
   .goods-info {
-    font-size: 14px;
+    font-size: 12px;
     position: absolute;
     bottom: 5px;
     left: 0;
