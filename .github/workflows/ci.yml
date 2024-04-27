@@ -1,3 +1,10 @@
+name: lint
+
+on:
+  push:
+    branches: [master]
+
+jobs: 
   # 创建 publish-npm 任务
   publish-npm:
     # 在 ubuntu 最新版本的虚拟机执行
